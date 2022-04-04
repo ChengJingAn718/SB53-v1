@@ -45,6 +45,9 @@ yeahAudio.volume = 0.7;
 wooAudio.volume = 0.7;
 clapAudio.volume = 0.2
 henCrowdAudio.volume = 0.6;
+henNormalAudio.volume = 0.7;
+
+henNormalAudio.loop = true;
 
 let audioListForMute = [
     titleAudio, bodyAudio, subBodyAudio, clickAudio, clapAudio, backAudio, buzzAudio, yeahAudio, tingAudio, wooAudio,
@@ -180,6 +183,7 @@ export default function BaseShot() {
 
         setLoop(backAudio)
         setLoop(henFeedAudio)
+        setLoop(henNormalAudio)
 
         clickAudio.volumn = 0.0
         yeahAudio.volumn = 0.6

@@ -155,11 +155,9 @@ const BaseScene = React.forwardRef(({ nextFunc, _geo, _baseGeo, showMusicBtn }, 
                     girlRefList[1].current.style.transform = 'translateX(' + _baseGeo.width * -1 + 'px)'
                     setTimeout(() => {
                         timerList[1] = setTimeout(() => {
-                            audioList.subBodyAudio.play();
-                            timerList[2] = setTimeout(() => {
-                                audioList.bodyAudio.play();
-                                startRepeatAudio()
-                            }, audioList.subBodyAudio.duration * 1000 + 1000);
+                            // audioList.subBodyAudio.play();
+                            // audioList.bodyAudio.play();
+                            startRepeatAudio()
                         }, 1000);
 
                         setIntroHide(true)

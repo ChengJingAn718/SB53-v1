@@ -165,6 +165,10 @@ const GamePanel = ({ finishGame, _baseGeo, _geo, stopSound }, ref) => {
             setTimeout(() => {
                 isGamestoneted = true;
             }, 500);
+
+            setTimeout(() => {
+                audioList.henNormalAudio.play();
+            }, 2500);
         },
     }))
 
@@ -198,6 +202,7 @@ const GamePanel = ({ finishGame, _baseGeo, _geo, stopSound }, ref) => {
     }
 
     function playEatingAni() {
+
         henAnimation.current.className = 'showObject'
         setStopAni(false)
 
@@ -220,6 +225,9 @@ const GamePanel = ({ finishGame, _baseGeo, _geo, stopSound }, ref) => {
 
                 setTimeout(() => {
                     baseRef.current.style.pointerEvents = ''
+                    setTimeout(() => {
+                        audioList.henNormalAudio.play();
+                    }, 500);
                 }, 2000);
 
                 henAnimation.current.className = 'hideObject'
@@ -245,19 +253,13 @@ const GamePanel = ({ finishGame, _baseGeo, _geo, stopSound }, ref) => {
     function clickFunc(num) {
 
         stopRepeatAudio();
-        if (currentNum == 0)
-            stopSound();
+        if (currentNum == 0) {
 
+            stopSound();
+        }
 
         clearTimeout(timerList[10])
-        audioList.henNormalAudio.pause();
-        audioList.henNormalAudio.currentTime = 0;
-        audioList.henNormalAudio.play();
 
-        timerList[10] = setTimeout(() => {
-            audioList.henNormalAudio.pause();
-            audioList.henNormalAudio.currentTime = 0;
-        }, 3000);
 
         if (num >= currentNum) {
             let currentstone = stoneBaseList[num]
@@ -348,6 +350,7 @@ const GamePanel = ({ finishGame, _baseGeo, _geo, stopSound }, ref) => {
 
                         if (currentNum % 10 == 0) {
 
+                            audioList.henNormalAudio.pause();
                             starRefList[currentStep].current.setClass('hide')
 
                             currentStep++;
@@ -372,13 +375,17 @@ const GamePanel = ({ finishGame, _baseGeo, _geo, stopSound }, ref) => {
                                     henAnimation.current.className = 'hideObject'
                                     characterList[0].current.setClass('hideObject')
 
+                                    audioList.henNormalAudio.pause();
                                     audioList.clapAudio.play();
 
                                     setTimeout(() => {
                                         baseRef.current.style.transition = '0.7s'
                                         baseRef.current.style.opacity = 0
+                                        
                                         audioList.henCrowdAudio.pause();
                                         audioList.henCrowdAudio.currentTime = 0;
+                                        audioList.henNormalAudio.currentTime = 0;
+
                                         setTimeout(() => {
                                             finishGame();
                                         }, 700);
