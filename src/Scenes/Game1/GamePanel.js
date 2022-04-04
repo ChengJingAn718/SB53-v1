@@ -160,7 +160,7 @@ const GamePanel = ({ finishGame, _baseGeo, _geo, stopSound }, ref) => {
             backRef.current.style.transition = '2s'
             backRef.current.style.transform = 'translate(' + (_baseGeo.width * (translatestonetPos.x -
                 movingSceneList[movingSceneNum] - 1)) + 'px, '
-                + _baseGeo.height * (translatestonetPos.y) + 'px)'
+                + _baseGeo.height * (translatestonetPos.y) + 'px) scale(1)'
 
             setTimeout(() => {
                 isGamestoneted = true;
@@ -170,6 +170,13 @@ const GamePanel = ({ finishGame, _baseGeo, _geo, stopSound }, ref) => {
                 audioList.henNormalAudio.play();
             }, 2500);
         },
+        scaleScene: () => {
+            backRef.current.style.transition = '4s'
+            backRef.current.style.transform = 'scale(1.2) ' + 'translate(' + (_baseGeo.width * (translatestonetPos.x -
+                movingSceneList[movingSceneNum])) + 'px, '
+                + _baseGeo.height * (translatestonetPos.y) + 'px)'
+
+        }
     }))
 
 
@@ -381,7 +388,7 @@ const GamePanel = ({ finishGame, _baseGeo, _geo, stopSound }, ref) => {
                                     setTimeout(() => {
                                         baseRef.current.style.transition = '0.7s'
                                         baseRef.current.style.opacity = 0
-                                        
+
                                         audioList.henCrowdAudio.pause();
                                         audioList.henCrowdAudio.currentTime = 0;
                                         audioList.henNormalAudio.currentTime = 0;

@@ -43,6 +43,7 @@ const BaseScene = React.forwardRef(({ nextFunc, _geo, _baseGeo, showMusicBtn }, 
     const playBtnRef = useRef();
     const gamePanelRef = useRef();
     const gameRef = useRef();
+    const girlBaseRef = useRef()
 
     function returnOption(index) {
         return {
@@ -132,8 +133,15 @@ const BaseScene = React.forwardRef(({ nextFunc, _geo, _baseGeo, showMusicBtn }, 
                 setAniStop(false)
                 audioList.bodyAudio.play();
 
+                girlBaseRef.current.style.transition = '4s'
+                girlBaseRef.current.style.transform = 'scale(1.2)'
+
+                gameRef.current.scaleScene();
+
                 setTimeout(() => {
                     setAniStop(true)
+
+
                     setTimeout(() => {
                         setAniStop(false)
                         setTimeout(() => {
@@ -149,15 +157,17 @@ const BaseScene = React.forwardRef(({ nextFunc, _geo, _baseGeo, showMusicBtn }, 
 
                 setTimeout(() => {
 
-                    audioList.bodyAudio.src = "./sounds/SB_53_Audio_02.mp3"
+                    // audioList.bodyAudio.src = "./sounds/SB_53_Audio_02.mp3"
                     gameRef.current.showingScene();
                     girlRefList[1].current.style.transition = '2s'
                     girlRefList[1].current.style.transform = 'translateX(' + _baseGeo.width * -1 + 'px)'
                     setTimeout(() => {
                         timerList[1] = setTimeout(() => {
-                            // audioList.subBodyAudio.play();
-                            // audioList.bodyAudio.play();
-                            startRepeatAudio()
+                            audioList.subBodyAudio.play();
+                            timerList[2] = setTimeout(() => {
+                                // audioList.bodyAudio.play();
+                                startRepeatAudio()
+                            }, audioList.subBodyAudio.duration * 1000 + 1000);
                         }, 1000);
 
                         setIntroHide(true)
@@ -306,35 +316,51 @@ const BaseScene = React.forwardRef(({ nextFunc, _geo, _baseGeo, showMusicBtn }, 
             }
 
             <div
-                ref={girlRefList[0]}
-                className='hideObejct'
+                ref={girlBaseRef}
                 style={{
                     position: "fixed", width: _geo.width * 0.2 + "px",
+                    height: _geo.width * 0.2 + "px",
                     left: _geo.width * 0.4 + _geo.left + "px"
                     , bottom: _geo.height * 0.15 + _geo.top + "px",
-                }}>
-                <Lottie autoplay loop options={returnOption(2)}
-                    mouseDown={false}
-                    isPaused={isAniStop}
-                    isStopped={isAniStop}
-                    isClickToPauseDisabled={true}
-                    speed={0.9}
-                />
-            </div>
-            <div ref={girlRefList[1]}
-                className='hideObject'
-                style={{
-                    position: "fixed", width: _geo.width * 0.2 + "px",
-                    left: _geo.width * 0.4 + _geo.left + "px"
-                    , bottom: _geo.height * 0.15 + _geo.top + "px",
-                }}>
-                <Lottie autoplay loop options={returnOption(3)}
-                    mouseDown={false}
-                    isPaused={isAniStop}
-                    isStopped={isAniStop}
-                    isClickToPauseDisabled={true}
-                    speed={0.9}
-                />
+                    pointerEvents: 'none'
+                }}
+            >
+                <div
+                    ref={girlRefList[0]}
+                    className='hideObejct'
+                    style={{
+                        position: "absolute",
+                        width: '100%',
+                        left: 0 + "px"
+                        , bottom: 0 + "px",
+                        pointerEvents: 'none'
+
+                    }}>
+                    <Lottie autoplay loop options={returnOption(2)}
+                        mouseDown={false}
+                        isPaused={isAniStop}
+                        isStopped={isAniStop}
+                        isClickToPauseDisabled={true}
+                        speed={0.9}
+                    />
+                </div>
+                <div ref={girlRefList[1]}
+                    className='hideObject'
+                    style={{
+                        position: "absolute",
+                        width: '100%',
+                        left: 0 + "px"
+                        , bottom: 0 + "px",
+                        pointerEvents: 'none'
+                    }}>
+                    <Lottie autoplay loop options={returnOption(3)}
+                        mouseDown={false}
+                        isPaused={isAniStop}
+                        isStopped={isAniStop}
+                        isClickToPauseDisabled={true}
+                        speed={0.9}
+                    />
+                </div>
             </div>
         </div >
     );
